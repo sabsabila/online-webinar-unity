@@ -84,10 +84,31 @@ public class PlayerController : MonoBehaviour
             else
                 avatars[i].SetActive(false);
         }
+        photonView.RPC("RandomizeAvatar_RPC", PhotonTargets.Others, randomValue);
     }
 
-    public void SetName(string name)
+    public void SetName()
     {
-        playerNameTxt.text = name;
+        playerNameTxt.text = "Player " + photonView.ownerId;
+        photonView.RPC("SetName_RPC", PhotonTargets.Others);
+    }
+
+
+    [PunRPC]
+    void RandomizeAvatar_RPC(int index)
+    {
+        for (int i = 0; i < avatars.Count; i++)
+        {
+            if (i == index)
+                avatars[i].SetActive(true);
+            else
+                avatars[i].SetActive(false);
+        }
+    }
+
+    [PunRPC]
+    public void SetName_RPC()
+    {
+        playerNameTxt.text = "Player " + photonView.ownerId;
     }
 }

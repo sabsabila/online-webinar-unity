@@ -17,6 +17,6 @@ public class RoomManager : MonoBehaviour
         GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition.position, Quaternion.identity, 0);
         player.transform.Rotate(0, 180, 0);
         player.GetComponent<PlayerController>().RandomizeAvatar();
-        player.GetComponent<PlayerController>().SetName(PhotonNetwork.playerName);
+        player.GetComponent<PlayerController>().SetName();
     }
 }

@@ -43,4 +43,9 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
+  - RandomizeAvatar_RPC
+  - SetNameRPC
+  - SetName_RPC
+  - InitPlayers_RPC
+  - Spawn_RPC
   DisableAutoOpenWizard: 1
