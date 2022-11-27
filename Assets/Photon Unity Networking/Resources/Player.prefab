@@ -261,9 +261,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7569589037180504636}
+  - component: {fileID: 5766308513176470080}
   - component: {fileID: 7569589037180504637}
-  - component: {fileID: 1603146726240434818}
-  - component: {fileID: 3922883259272452361}
+  - component: {fileID: 687863827979530090}
+  - component: {fileID: 4954858462909013620}
+  - component: {fileID: 5050501109226230574}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -287,6 +289,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!143 &5766308513176470080
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7569589037180504639}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7569589037180504637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,9 +319,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5191ca00381c34e89da6847ac6f2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 1603146726240434818}
+  photonView: {fileID: 4954858462909013620}
+  playercam: {fileID: 0}
+  playerLookCam: {fileID: 0}
   walkVelocity: 2.5
-  runVelocity: 5
   turnSpeed: 10
   avatars:
   - {fileID: 7335797331465439228}
@@ -310,7 +331,38 @@ MonoBehaviour:
   - {fileID: 7335797330200342002}
   - {fileID: 7335797331149093021}
   playerNameTxt: {fileID: 7569589037066496737}
---- !u!114 &1603146726240434818
+--- !u!114 &687863827979530090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7569589037180504639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: cc9fde9eac6ebe4418f8f9c7b92156b3,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &4954858462909013620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,13 +383,13 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 3922883259272452361}
+  - {fileID: 5050501109226230574}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
---- !u!114 &3922883259272452361
+--- !u!114 &5050501109226230574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1037,15 +1089,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11ba053e254dde24b90078a767105b94, type: 3}
---- !u!4 &7964101792624146248 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 11ba053e254dde24b90078a767105b94,
-    type: 3}
-  m_PrefabInstance: {fileID: 7569589038354829475}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7335797330200342002 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 11ba053e254dde24b90078a767105b94,
+    type: 3}
+  m_PrefabInstance: {fileID: 7569589038354829475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7964101792624146248 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 11ba053e254dde24b90078a767105b94,
     type: 3}
   m_PrefabInstance: {fileID: 7569589038354829475}
   m_PrefabAsset: {fileID: 0}

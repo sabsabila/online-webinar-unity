@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public PhotonView photonView;
+    [SerializeField] private PhotonView photonView;
+    [SerializeField] private GameObject playercam, playerLookCam;
     [SerializeField] private float walkVelocity = 2.5f;
-    [SerializeField] private float runVelocity = 5f;
     [SerializeField] private float turnSpeed = 10f;
     [SerializeField] private List<GameObject> avatars;
     [SerializeField] private TMP_Text playerNameTxt;
@@ -15,14 +16,19 @@ public class PlayerController : MonoBehaviour
     private Vector2 input;
     private float angle;
     private float moveVelocity;
-
+    private PlayerInput playerInput;
     private Quaternion targetRotation;
-    private Transform cam;
 
     void Start()
     {
-        cam = Camera.main.transform;
         moveVelocity = walkVelocity;
+        playerInput = GetComponent<PlayerInput>();
+
+        if (photonView.isMine)
+        {
+            playercam.SetActive(true);
+            playerLookCam.SetActive(true);
+        }
     }
 
     void Update()
@@ -31,13 +37,9 @@ public class PlayerController : MonoBehaviour
         {
             GetInput();
 
-            if (Mathf.Abs(input.x) < 1 && Mathf.Abs(input.y) < 1)
+            if (Mathf.Abs(input.x) < 0.01 && Mathf.Abs(input.y) < 0.01)
             {
                 return;
-            }
-            else if (Input.GetKey(KeyCode.LeftShift))
-            {
-                moveVelocity = runVelocity;
             }
             else
             {
@@ -52,15 +54,15 @@ public class PlayerController : MonoBehaviour
 
     private void GetInput()
     {
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.y = Input.GetAxisRaw("Vertical");
+        Vector2 inputValue = playerInput.actions["Move"].ReadValue<Vector2>();
+        input.x = inputValue.x;
+        input.y = inputValue.y;
     }
 
     private void CalculateDirection()
     {
         angle = Mathf.Atan2(input.x, input.y);
         angle = Mathf.Rad2Deg * angle;
-        angle += cam.eulerAngles.y;
     }
 
     private void Rotate()
@@ -95,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
 
     [PunRPC]
-    void RandomizeAvatar_RPC(int index)
+    public void RandomizeAvatar_RPC(int index)
     {
         for (int i = 0; i < avatars.Count; i++)
         {
